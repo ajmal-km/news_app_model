@@ -16,54 +16,55 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   Widget build(BuildContext context) {
     final bottomNavProvider = context.watch<BottomNavBarController>();
     return Scaffold(
-        body: bottomNavProvider.screens[bottomNavProvider.currentScreenIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: bottomNavProvider.currentScreenIndex,
-          onTap: (value) {
-            context.read<BottomNavBarController>().setCurrentIndex(value);
-          },
-          selectedItemColor: ColorConstants.red,
-          unselectedItemColor: ColorConstants.bodyFont,
-          backgroundColor: ColorConstants.black,
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.house,
-              ),
-              label: "Home",
+      body: bottomNavProvider.screens[bottomNavProvider.currentScreenIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomNavProvider.currentScreenIndex,
+        onTap: (value) {
+          context.read<BottomNavBarController>().setCurrentIndex(value);
+        },
+        selectedItemColor: ColorConstants.red,
+        unselectedItemColor: ColorConstants.bodyFont,
+        backgroundColor: ColorConstants.black,
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.house,
             ),
-            BottomNavigationBarItem(
-              icon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.magnifyingGlass,
-              ),
-              label: "Search",
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.magnifyingGlass,
             ),
-            BottomNavigationBarItem(
-              activeIcon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.solidBookmark,
-              ),
-              icon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.bookmark,
-              ),
-              label: "Bookmark",
+            label: "Search",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.solidBookmark,
             ),
-            BottomNavigationBarItem(
-              activeIcon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.solidCircleUser,
-              ),
-              icon: FaIcon(
-                size: 21,
-                FontAwesomeIcons.circleUser,
-              ),
-              label: "Profile",
+            icon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.bookmark,
             ),
-          ],
-        ));
+            label: "Bookmark",
+          ),
+          BottomNavigationBarItem(
+            activeIcon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.solidCircleUser,
+            ),
+            icon: FaIcon(
+              size: 21,
+              FontAwesomeIcons.circleUser,
+            ),
+            label: "Profile",
+          ),
+        ],
+      ),
+    );
   }
 }

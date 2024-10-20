@@ -9,16 +9,18 @@ class SourceTile extends StatelessWidget {
     this.name,
     this.description,
     this.category,
+    this.onTapped,
   });
 
   final String? name;
   final String? description;
   final String? category;
+  final void Function()? onTapped;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: onTapped,
       leading: CircleAvatar(
         radius: 23,
         backgroundColor: ColorConstants.transparent,

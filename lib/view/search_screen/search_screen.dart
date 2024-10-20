@@ -59,8 +59,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: <Widget>[
                   Padding(
                     padding: searchProvider.newsSearchModel == null
-                        ? EdgeInsets.symmetric(horizontal: 18)
-                        : EdgeInsets.only(right: 18),
+                        ? EdgeInsets.only(left: 18, right: 18, bottom: 16)
+                        : EdgeInsets.only(left: 18),
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -144,7 +144,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       builder: (context) {
                         if (searchProvider.newsSearchModel == null) {
                           return ListView(
-                            padding: EdgeInsets.only(top: 20),
                             children: <Widget>[
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

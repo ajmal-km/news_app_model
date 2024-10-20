@@ -3,9 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app_model/utils/color_constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailScreen extends StatelessWidget {
-  const NewsDetailScreen({super.key});
+  const NewsDetailScreen({
+    super.key,
+    this.title,
+    this.source,
+    this.imageUrl,
+    this.time,
+    this.author,
+    this.newsSiteUrl,
+    this.description,
+    this.content,
+  });
+
+  final String? title;
+  final String? source;
+  final String? imageUrl;
+  final String? time;
+  final String? author;
+  final String? newsSiteUrl;
+  final String? description;
+  final String? content;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +45,7 @@ class NewsDetailScreen extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 15, left: 15, bottom: 15, top: 12),
+            padding: EdgeInsets.fromLTRB(15, 12, 15, 15),
             child: Row(
               children: <Widget>[
                 CircleAvatar(
@@ -34,7 +54,7 @@ class NewsDetailScreen extends StatelessWidget {
                   child: FaIcon(
                     FontAwesomeIcons.globe,
                     color: ColorConstants.white,
-                    size: 25,
+                    size: 22,
                   ),
                 ),
                 SizedBox(width: 10),
@@ -110,7 +130,7 @@ class NewsDetailScreen extends StatelessWidget {
                 "Ukraine's President Zelensky to BBC: Blood money being paid for Russian oil",
                 style: GoogleFonts.kanit(
                   color: ColorConstants.white,
-                  fontSize: 28,
+                  fontSize: 26,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -1,
                 ),
@@ -121,9 +141,9 @@ class NewsDetailScreen extends StatelessWidget {
                 style: GoogleFonts.kanit(
                   height: 1.2,
                   color: ColorConstants.bodyFont,
-                  fontSize: 23,
+                  fontSize: 20,
                   fontWeight: FontWeight.w200,
-                  letterSpacing: -0.3,
+                  letterSpacing: -0,
                   wordSpacing: 2,
                 ),
               ),
@@ -133,9 +153,9 @@ class NewsDetailScreen extends StatelessWidget {
                 style: GoogleFonts.kanit(
                   height: 1.2,
                   color: ColorConstants.bodyFont,
-                  fontSize: 23,
+                  fontSize: 20,
                   fontWeight: FontWeight.w200,
-                  letterSpacing: -0.3,
+                  letterSpacing: -0,
                   wordSpacing: 2,
                 ),
               ),
@@ -143,31 +163,31 @@ class NewsDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: ColorConstants.black,
-          border: Border(
-            top: BorderSide(width: 0.75, color: ColorConstants.transparent),
-          ),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(12),
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Container(
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: ColorConstants.red,
-                  borderRadius: BorderRadius.circular(9),
-                ),
-                child: Text(
-                  "See website",
-                  style: GoogleFonts.kanit(
-                    color: ColorConstants.white,
-                    fontSize: 18.6,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.2,
+              child: GestureDetector(
+                onTap: () async {
+                  var url = Uri.parse("uri");
+                  if (!await launchUrl(url)) {}
+                },
+                child: Container(
+                  height: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: ColorConstants.red,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: Text(
+                    "See website",
+                    style: GoogleFonts.kanit(
+                      color: ColorConstants.white,
+                      fontSize: 18.6,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: -0.2,
+                    ),
                   ),
                 ),
               ),
