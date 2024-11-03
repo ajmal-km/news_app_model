@@ -2,7 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app_model/controller/bookmark_screen_controller.dart';
+import 'package:news_app_model/model/bookmark_model.dart';
 import 'package:news_app_model/utils/color_constants.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailScreen extends StatelessWidget {
@@ -13,7 +16,7 @@ class NewsDetailScreen extends StatelessWidget {
     this.imageUrl,
     this.time,
     this.author,
-    this.newsSiteUrl,
+    this.websiteUrl,
     this.description,
     this.content,
   });
@@ -23,7 +26,7 @@ class NewsDetailScreen extends StatelessWidget {
   final String? imageUrl;
   final String? time;
   final String? author;
-  final String? newsSiteUrl;
+  final String? websiteUrl;
   final String? description;
   final String? content;
 
@@ -59,7 +62,7 @@ class NewsDetailScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  "SOURCE",
+                  "${source.toString()}",
                   style: GoogleFonts.kanit(
                     color: ColorConstants.white,
                     fontSize: 17,
@@ -69,7 +72,7 @@ class NewsDetailScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "Time",
+                  "${time.toString()}",
                   style: GoogleFonts.kanit(
                     color: ColorConstants.bodyFont,
                     fontSize: 15,
@@ -82,7 +85,7 @@ class NewsDetailScreen extends StatelessWidget {
           ),
           CachedNetworkImage(
             imageUrl:
-                "https://images.pexels.com/photos/28864480/pexels-photo-28864480/free-photo-of-tranquil-beach-sunset-with-vibrant-sky.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+                "${imageUrl?.toString()}",
             height: 290,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -115,7 +118,7 @@ class NewsDetailScreen extends StatelessWidget {
                     ),
                     SizedBox(width: 15),
                     Text(
-                      "AUTHOR",
+                      "${author?.toString()}",
                       style: GoogleFonts.kanit(
                         color: ColorConstants.lightWhite,
                         fontSize: 16,
@@ -127,7 +130,7 @@ class NewsDetailScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                "Ukraine's President Zelensky to BBC: Blood money being paid for Russian oil",
+                "${title?.toString()}",
                 style: GoogleFonts.kanit(
                   color: ColorConstants.white,
                   fontSize: 26,
@@ -137,7 +140,7 @@ class NewsDetailScreen extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Text(
-                "Ukrainian President Volodymyr Zelensky has accused European countries that continue to buy Russian oil of earning their money in other people's blood.",
+                "${description?.toString()}",
                 style: GoogleFonts.kanit(
                   height: 1.2,
                   color: ColorConstants.bodyFont,
@@ -149,7 +152,7 @@ class NewsDetailScreen extends StatelessWidget {
               ),
               SizedBox(height: 15),
               Text(
-                "Ukrainian President Volodymyr Zelensky has accused European countries that continue to buy Russian oil of earning their money in other people's blood.",
+                "${content?.toString()}",
                 style: GoogleFonts.kanit(
                   height: 1.2,
                   color: ColorConstants.bodyFont,
@@ -170,7 +173,7 @@ class NewsDetailScreen extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () async {
-                  var url = Uri.parse("uri");
+                  var url = Uri.parse("${websiteUrl?.toString()}");
                   if (!await launchUrl(url)) {}
                 },
                 child: Container(
@@ -195,7 +198,18 @@ class NewsDetailScreen extends StatelessWidget {
             SizedBox(width: 10),
             GestureDetector(
               onTap: () {
-                //
+                context.read<BookmarkScreenController>().addToBookmark(
+                      BookmarkModel(
+                        title: title,
+                        author: author,
+                        content: content,
+                        description: description,
+                        source: source,
+                        urlToImage: imageUrl,
+                        url: websiteUrl,
+                        publishedAt: time,
+                      ),
+                    );
               },
               child: Container(
                 height: 40,

@@ -5,6 +5,7 @@ import 'package:news_app_model/view/news_detail_screen/news_detail_screen.dart';
 
 class RecentTab extends StatelessWidget {
   const RecentTab({super.key});
+  
 
   @override
   Widget build(BuildContext context) {

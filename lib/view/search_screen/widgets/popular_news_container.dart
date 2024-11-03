@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app_model/utils/color_constants.dart';
-import 'package:news_app_model/view/news_detail_screen/news_detail_screen.dart';
 
 class PopularNewsContainer extends StatelessWidget {
   const PopularNewsContainer({
@@ -11,24 +10,18 @@ class PopularNewsContainer extends StatelessWidget {
     this.title,
     this.source,
     this.time,
-    this.image,
+    this.image, this.onTapped,
   });
   final String? title;
   final String? source;
   final String? time;
   final String? image;
+  final void Function()? onTapped;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewsDetailScreen(),
-          ),
-        );
-      },
+      onTap: onTapped,
       child: Stack(
         children: <Widget>[
           ClipRRect(

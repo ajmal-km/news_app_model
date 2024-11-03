@@ -6,6 +6,7 @@ import 'package:news_app_model/utils/color_constants.dart';
 import 'package:news_app_model/view/global_widgets/custom_tile.dart';
 import 'package:news_app_model/view/search_screen/widgets/popular_news_container.dart';
 import 'package:news_app_model/view/search_screen/widgets/source_tile.dart';
+import 'package:news_app_model/view/source_details_screen/source_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -304,6 +305,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                             category: searchProvider
                                                 .sourcesList[index].category
                                                 .toString(),
+                                            onTapped: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SourceDetailsScreen(),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                 ],

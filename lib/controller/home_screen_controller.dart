@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:news_app_model/model/trending_headlines_model.dart';
+import 'package:news_app_model/model/news_model.dart';
 import 'package:news_app_model/view/notifications_screen/notifications_screen.dart';
 import 'package:news_app_model/view/trending_news_screen/trending_news_screen.dart';
 
 class HomeScreenController with ChangeNotifier {
-  TrendingHeadlinesModel? trendingNewsModel;
-  TrendingHeadlinesModel? categorizedNews;
+  NewsModel? trendingNewsModel;
+  NewsModel? categorizedNews;
   bool isLoading = false;
   bool isCategoryLoading = false;
   List<Article> articles = [];
@@ -32,7 +32,7 @@ class HomeScreenController with ChangeNotifier {
           "https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=5e4535981a3640e0b6e16c70f325644e");
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        categorizedNews = trendingHeadlinesModelFromJson(response.body);
+        categorizedNews = newsModelFromJson(response.body);
       }
       if (categorizedNews != null) {
         categorizedArticles = categorizedNews?.articles ?? [];
@@ -57,7 +57,7 @@ class HomeScreenController with ChangeNotifier {
           "https://newsapi.org/v2/top-headlines?country=us&apiKey=5e4535981a3640e0b6e16c70f325644e");
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        trendingNewsModel = trendingHeadlinesModelFromJson(response.body);
+        trendingNewsModel = newsModelFromJson(response.body);
       }
       if (trendingNewsModel != null) {
         articles = trendingNewsModel?.articles ?? [];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:news_app_model/controller/trending_news_controller_screen.dart';
+import 'package:news_app_model/controller/trending_news_controller.dart';
 import 'package:news_app_model/utils/color_constants.dart';
 import 'package:news_app_model/view/trending_news_screen/widgets/trending_container.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +17,7 @@ class _TrendingNewsScreenState extends State<TrendingNewsScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
-        await context.read<TrendingNewsControllerScreen>().getTrendNews();
+        await context.read<TrendingNewsController>().getTrendNews();
       },
     );
     super.initState();
@@ -25,7 +25,7 @@ class _TrendingNewsScreenState extends State<TrendingNewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final trendProvider = context.watch<TrendingNewsControllerScreen>();
+    final trendProvider = context.watch<TrendingNewsController>();
     return Scaffold(
       backgroundColor: ColorConstants.black,
       appBar: AppBar(
@@ -87,10 +87,8 @@ class _TrendingNewsScreenState extends State<TrendingNewsScreen> {
                   author: trendProvider.articles[index].author.toString(),
                   title: trendProvider.articles[index].title,
                   channelName: trendProvider.articles[index].source!.name,
-                  time: context
-                      .read<TrendingNewsControllerScreen>()
-                      .formatDateTime(
-                          trendProvider.articles[index].publishedAt),
+                  time: context.read<TrendingNewsController>().formatDateTime(
+                      trendProvider.articles[index].publishedAt),
                 ),
               ),
             ),

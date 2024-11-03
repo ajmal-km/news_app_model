@@ -1,25 +1,23 @@
 // To parse this JSON data, do
 //
-//     final searchModel = searchModelFromJson(jsonString);
+//     final searchModel = newsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-SearchModel searchModelFromJson(String str) =>
-    SearchModel.fromJson(json.decode(str));
+NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
 
-
-class SearchModel {
+class NewsModel {
   String? status;
   int? totalResults;
   List<Article>? articles;
 
-  SearchModel({
+  NewsModel({
     this.status,
     this.totalResults,
     this.articles,
   });
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
+  factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
         status: json["status"],
         totalResults: json["totalResults"],
         articles: json["articles"] == null

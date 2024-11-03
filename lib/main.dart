@@ -3,7 +3,7 @@ import 'package:news_app_model/controller/bookmark_screen_controller.dart';
 import 'package:news_app_model/controller/bottom_nav_bar_controller.dart';
 import 'package:news_app_model/controller/home_screen_controller.dart';
 import 'package:news_app_model/controller/search_screen_controller.dart';
-import 'package:news_app_model/controller/trending_news_controller_screen.dart';
+import 'package:news_app_model/controller/trending_news_controller.dart';
 import 'package:news_app_model/view/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchScreenController(),
         ),
         ChangeNotifierProvider(
-          create: (context) => TrendingNewsControllerScreen(),
+          create: (context) => TrendingNewsController(),
         ),
         ChangeNotifierProvider(
           create: (context) => BookmarkScreenController(),

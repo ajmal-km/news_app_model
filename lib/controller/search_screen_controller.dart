@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:news_app_model/model/search_model.dart';
+import 'package:news_app_model/model/news_model.dart';
 import 'package:news_app_model/model/source_model.dart';
 
 class SearchScreenController with ChangeNotifier {
   SourceModel? sourceModel;
   List<Sources> sourcesList = [];
-  SearchModel? popularNewsModel;
+  NewsModel? popularNewsModel;
   List<Article> popularNewsList = [];
   bool seeAll = false;
   int sourceIndex = 0;
@@ -21,7 +21,7 @@ class SearchScreenController with ChangeNotifier {
     "General",
     "Entertainment",
   ];
-  SearchModel? newsSearchModel;
+  NewsModel? newsSearchModel;
   List<Article> newsArticles = [];
   bool isSearchLoading = false;
   bool isPopularLoading = false;
@@ -53,7 +53,7 @@ class SearchScreenController with ChangeNotifier {
           "https://newsapi.org/v2/top-headlines?country=us&sortBy=popularity&apiKey=5e4535981a3640e0b6e16c70f325644e");
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        popularNewsModel = searchModelFromJson(response.body);
+        popularNewsModel = newsModelFromJson(response.body);
         if (popularNewsModel != null) {
           popularNewsList = popularNewsModel?.articles ?? [];
         }
@@ -113,7 +113,7 @@ class SearchScreenController with ChangeNotifier {
           "https://newsapi.org/v2/everything?q=$keyword&apiKey=5e4535981a3640e0b6e16c70f325644e");
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        newsSearchModel = searchModelFromJson(response.body);
+        newsSearchModel = newsModelFromJson(response.body);
       }
       if (newsSearchModel != null) {
         newsArticles = newsSearchModel!.articles ?? [];
